@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -24,6 +25,7 @@ import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
+import com.sam_chordas.android.stockhawk.utility.Utility;
 
 public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -112,11 +114,29 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data){
         mCursorAdapter.swapCursor(data);
+        updateEmptyView();
         mCursor = data;
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader){
         mCursorAdapter.swapCursor(null);
+    }
+
+    private void updateEmptyView() {
+        TextView tv = (TextView) getView().findViewById(R.id.view_stock_empty);
+
+        if ( mCursorAdapter.getItemCount() == 0 ) {
+            if ( null != tv ) {
+                // if cursor is empty, why? do we have an invalid location
+                int message = R.string.empty_stock_list;
+                if (!Utility.isConnected(getActivity()) ) {
+                    message = R.string.empty_stock_list_no_network;
+                }
+                tv.setText(message);
+            }
+        } else {
+            tv.setVisibility(View.INVISIBLE);
+        }
     }
 }

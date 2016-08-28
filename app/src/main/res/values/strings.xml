@@ -14,4 +14,7 @@
     <string name="empty_stock_list">No Stock Information Available</string>
     <string name="empty_stock_list_no_network">No Stock information available. The network is not available to fetch stock            data.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.ui;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -27,6 +28,9 @@ import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
 import com.sam_chordas.android.stockhawk.utility.Utility;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor> {
 
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
@@ -34,7 +38,28 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
     private QuoteCursorAdapter mCursorAdapter;
     private Cursor mCursor;
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({STATUS_OK, STATUS_SERVER_DOWN, STATUS_SERVER_INVALID,  STATUS_UNKNOWN})
+    public @interface LocationStatus {}
+
+    public static final int STATUS_OK = 0;
+    public static final int STATUS_SERVER_DOWN = 1;
+    public static final int STATUS_SERVER_INVALID = 2;
+    public static final int STATUS_UNKNOWN = 3;
+
     public MyStockFragment() {}
+
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public void onItemSelected(String stockId);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,8 +75,12 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(getContext(),
                 new RecyclerViewItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View v, int position) {
-                        //TODO:
-                        // do something on item click
+                        mCursor = mCursorAdapter.getCursor();
+
+                        if (mCursor != null) {
+                            ((Callback) getActivity())
+                                    .onItemSelected(mCursor.getString(mCursor.getColumnIndex(QuoteColumns._ID)));
+                        }
                     }
                 }));
         recyclerView.setAdapter(mCursorAdapter);

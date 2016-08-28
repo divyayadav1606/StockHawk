@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
+
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.Utils;
@@ -18,8 +19,9 @@ import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.sam_chordas.android.stockhawk.utility.Utility;
 
-public class MyStocksActivity extends AppCompatActivity {
-
+public class MyStocksActivity extends AppCompatActivity implements MyStockFragment.Callback {
+    private boolean mTwoPane;
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
     private CharSequence mTitle;
     boolean isConnected;
 
@@ -44,6 +46,18 @@ public class MyStocksActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             startStockService();
+        }
+
+        if (findViewById(R.id.stock_detail_container) != null) {
+            mTwoPane = true;
+
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.stock_detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
+                        .commit();
+            }
+        } else {
+            mTwoPane = false;
         }
 
         mTitle = getTitle();
@@ -102,6 +116,25 @@ public class MyStocksActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(String stockId) {
+        if (mTwoPane) {
+            Bundle args = new Bundle();
+            args.putString(DetailFragment.STOCK_ID, stockId);
+
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.stock_detail_container, fragment, DETAILFRAGMENT_TAG)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra(DetailFragment.STOCK_ID, stockId);
+            startActivity(intent);
+        }
     }
 
 }

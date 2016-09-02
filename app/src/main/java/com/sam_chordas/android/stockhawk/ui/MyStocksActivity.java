@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
-
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.Utils;
@@ -119,10 +118,10 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
     }
 
     @Override
-    public void onItemSelected(String stockId) {
+    public void onItemSelected(String symbol) {
         if (mTwoPane) {
             Bundle args = new Bundle();
-            args.putString(DetailFragment.STOCK_ID, stockId);
+            args.putString(DetailFragment.STOCK_SYMBOL, symbol);
 
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(args);
@@ -132,7 +131,7 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
                     .commit();
         } else {
             Intent intent = new Intent(this, DetailActivity.class);
-            intent.putExtra(DetailFragment.STOCK_ID, stockId);
+            intent.putExtra(DetailFragment.STOCK_SYMBOL, symbol);
             startActivity(intent);
         }
     }

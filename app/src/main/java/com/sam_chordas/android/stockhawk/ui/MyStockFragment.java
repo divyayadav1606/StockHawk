@@ -76,10 +76,10 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
                 new RecyclerViewItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View v, int position) {
                         mCursor = mCursorAdapter.getCursor();
-
+                        mCursor.moveToPosition(position);
                         if (mCursor != null) {
                             ((Callback) getActivity())
-                                    .onItemSelected(mCursor.getString(mCursor.getColumnIndex(QuoteColumns._ID)));
+                                    .onItemSelected(mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
                         }
                     }
                 }));

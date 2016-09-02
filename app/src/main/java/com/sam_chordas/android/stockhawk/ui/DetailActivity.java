@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putParcelable(DetailFragment.STOCK_ID, getIntent().getData());
+            arguments.putString(DetailFragment.STOCK_SYMBOL, getIntent().getStringExtra(DetailFragment.STOCK_SYMBOL));
 
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(arguments);

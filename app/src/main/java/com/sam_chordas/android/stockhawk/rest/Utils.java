@@ -89,7 +89,7 @@ public class Utils {
                 builder.withValue(QuoteColumns.ISUP, 1);
             }
             builder.withValue(QuoteColumns.DAYSHIGH, jsonObject.get("DaysHigh"));
-            builder.withValue(QuoteColumns.DAYSLOW, jsonObject.get("Dayslow"));
+            builder.withValue(QuoteColumns.DAYSLOW, jsonObject.get("DaysLow"));
             builder.withValue(QuoteColumns.YEARHIGH, jsonObject.get("YearHigh"));
             builder.withValue(QuoteColumns.YEARLOW, jsonObject.get("YearLow"));
             builder.withValue(QuoteColumns.YEARRANGE, jsonObject.get("YearRange"));
@@ -97,7 +97,7 @@ public class Utils {
             builder.withValue(QuoteColumns.AVGVOLUME, jsonObject.get("AverageDailyVolume"));
             builder.withValue(QuoteColumns.MKTCAP, jsonObject.get("MarketCapitalization"));
             builder.withValue(QuoteColumns.NAME, jsonObject.get("Name"));
-            builder.withValue(QuoteColumns.YIELD, jsonObject.get("DividendYield"));
+ //           builder.withValue(QuoteColumns.YIELD, jsonObject.get("DividendYield"));
             builder.withValue(QuoteColumns.PEGRATIO, jsonObject.get("PEGRatio"));
             builder.withValue(QuoteColumns.OPEN, jsonObject.get("Open"));
         } catch (JSONException e){

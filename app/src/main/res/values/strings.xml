@@ -16,5 +16,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">OPEN</string>
+    <string name="mkt_cap">MKT CAP</string>
+    <string name="high">HIGH</string>
+    <string name="_52w_high">52W HIGH</string>
+    <string name="low">LOW</string>
+    <string name="_52w_low">52W LOW</string>
+    <string name="vol">VOL</string>
+    <string name="avg_vol">AVG VOL</string>
+    <string name="p_e">P/E</string>
+    <string name="yield">YIELD</string>
 
 </resources>

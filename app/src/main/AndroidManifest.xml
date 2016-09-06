@@ -23,7 +23,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,7 +35,9 @@
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
             </intent-filter>
         </service>
-        <service android:name=".service.StockIntentService" />
+
+        <service
+            android:name=".service.StockIntentService" />
 
         <provider
             android:name=".data.generated.QuoteProvider"

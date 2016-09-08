@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.ui;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
@@ -25,6 +26,7 @@ import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
+import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
 import com.sam_chordas.android.stockhawk.utility.Utility;
 
@@ -107,9 +109,10 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
                                         toast.show();
                                     } else {
                                         // Add the stock to DB
-                                        //mServiceIntent.putExtra("tag", "add");
-                                        //mServiceIntent.putExtra("symbol", input.toString());
-                                        //startService(mServiceIntent);
+                                        Intent mServiceIntent = new Intent(getActivity(), StockIntentService.class);
+                                        mServiceIntent.putExtra("tag", "add");
+                                        mServiceIntent.putExtra("symbol", input.toString());
+                                        getActivity().startService(mServiceIntent);
                                     }
                                 }
                             })

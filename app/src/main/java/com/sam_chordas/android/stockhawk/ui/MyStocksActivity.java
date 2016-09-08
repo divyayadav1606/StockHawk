@@ -103,15 +103,11 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if (id == R.id.action_change_units){
-            Utils.showPercent = !Utils.showPercent;
-            this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
+        switch (item.getItemId()) {
+            case R.id.action_change_units:
+                Utils.showPercent = !Utils.showPercent;
+                this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -135,5 +131,4 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
             startActivity(intent);
         }
     }
-
 }

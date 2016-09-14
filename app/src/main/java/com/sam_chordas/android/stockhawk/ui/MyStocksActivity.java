@@ -2,10 +2,12 @@ package com.sam_chordas.android.stockhawk.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
@@ -18,11 +20,17 @@ import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.sam_chordas.android.stockhawk.utility.Utility;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MyStocksActivity extends AppCompatActivity implements MyStockFragment.Callback {
     private boolean mTwoPane;
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     private CharSequence mTitle;
     boolean isConnected;
+
+    @Nullable
+    @BindView(R.id.stock_detail_container) FrameLayout layout;
 
     private void startStockService() {
         Intent mServiceIntent = new Intent(this, StockIntentService.class);
@@ -43,11 +51,13 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
         isConnected = Utility.isConnected(this);
         setContentView(R.layout.activity_my_stocks);
 
+        ButterKnife.bind(this);
+
         if (savedInstanceState == null){
             startStockService();
         }
 
-        if (findViewById(R.id.stock_detail_container) != null) {
+        if (layout != null) {
             mTwoPane = true;
 
             if (savedInstanceState == null) {
@@ -106,6 +116,11 @@ public class MyStocksActivity extends AppCompatActivity implements MyStockFragme
         switch (item.getItemId()) {
             case R.id.action_change_units:
                 Utils.showPercent = !Utils.showPercent;
+
+                if (Utils.showPercent)
+                    item.setIcon(R.drawable.ic_attach_money_white_24dp);
+                else
+                    item.setIcon(R.drawable.percentage);
                 this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
                 break;
         }

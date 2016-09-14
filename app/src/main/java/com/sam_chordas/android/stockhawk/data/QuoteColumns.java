@@ -26,7 +26,7 @@ public class QuoteColumns {
     @DataType(DataType.Type.INTEGER) @NotNull
     public static final String ISCURRENT = "is_current";
 
-    //Add new colums for Detail Activity
+    //Add new columns for Detail Activity
     @DataType(DataType.Type.TEXT)
     public static final String DAYSLOW = "days_low";
     @DataType(DataType.Type.TEXT)

@@ -33,6 +33,9 @@ import com.sam_chordas.android.stockhawk.utility.Utility;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor> {
 
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
@@ -48,6 +51,10 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
     public static final int STATUS_SERVER_DOWN = 1;
     public static final int STATUS_SERVER_INVALID = 2;
     public static final int STATUS_UNKNOWN = 3;
+
+    @BindView(R.id.recycler_view) RecyclerView rcView;
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.view_stock_empty) TextView tv;
 
     public MyStockFragment() {}
 
@@ -68,13 +75,14 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_stocks, container, false);
 
+        ButterKnife.bind(this, view);
+
         mCallbacks = this;
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcView.setLayoutManager(new LinearLayoutManager(getContext()));
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
         mCursorAdapter = new QuoteCursorAdapter(getContext(), null);
-        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(getContext(),
+        rcView.addOnItemTouchListener(new RecyclerViewItemClickListener(getContext(),
                 new RecyclerViewItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View v, int position) {
                         mCursor = mCursorAdapter.getCursor();
@@ -85,10 +93,9 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
                         }
                     }
                 }));
-        recyclerView.setAdapter(mCursorAdapter);
+        rcView.setAdapter(mCursorAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.attachToRecyclerView(recyclerView);
+        fab.attachToRecyclerView(rcView);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                     new MaterialDialog.Builder(getContext()).title(R.string.symbol_search)
@@ -122,7 +129,7 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mCursorAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+        mItemTouchHelper.attachToRecyclerView(rcView);
 
         return view;
     }
@@ -156,8 +163,6 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
     }
 
     private void updateEmptyView() {
-        TextView tv = (TextView) getView().findViewById(R.id.view_stock_empty);
-
         if ( mCursorAdapter.getItemCount() == 0 ) {
             if ( null != tv ) {
                 // if cursor is empty, why? do we have an invalid location

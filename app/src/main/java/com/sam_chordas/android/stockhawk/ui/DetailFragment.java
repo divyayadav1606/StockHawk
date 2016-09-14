@@ -36,8 +36,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     static final String STOCK_SYMBOL = "SYMBOL";
     String symbol;
 
-    LineChartView graph;
-
     @BindView(R.id.open) TextView open;
     @BindView(R.id.mkt_cap) TextView mkt_cap;
     @BindView(R.id.day_high) TextView day_high;
@@ -48,6 +46,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @BindView(R.id.avg_vol) TextView avg_volume;
     @BindView(R.id.yield) TextView yield;
     @BindView(R.id.pneratio) TextView pneratio;
+    @BindView(R.id.graph) LineChartView graph;
 
     public DetailFragment() {
     }
@@ -71,8 +70,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
         symbol = arguments.getString(DetailFragment.STOCK_SYMBOL);
-
-        graph = (LineChartView) view.findViewById(R.id.graph);
 
         getLoaderManager().initLoader(CURSOR_LOADER_QUOTE, null, this);
         getLoaderManager().initLoader(CURSOR_LOADER_HISTORICAL_DATA, null, this);

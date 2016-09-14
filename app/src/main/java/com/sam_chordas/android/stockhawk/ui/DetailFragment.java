@@ -71,6 +71,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         ButterKnife.bind(this, view);
         symbol = arguments.getString(DetailFragment.STOCK_SYMBOL);
 
+        getActivity().setTitle(symbol);
+
         getLoaderManager().initLoader(CURSOR_LOADER_QUOTE, null, this);
         getLoaderManager().initLoader(CURSOR_LOADER_HISTORICAL_DATA, null, this);
         return view;

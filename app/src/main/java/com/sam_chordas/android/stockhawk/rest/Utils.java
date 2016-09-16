@@ -96,7 +96,7 @@ public class Utils {
             builder.withValue(QuoteColumns.AVGVOLUME, jsonObject.get("AverageDailyVolume"));
             builder.withValue(QuoteColumns.MKTCAP, jsonObject.get("MarketCapitalization"));
             builder.withValue(QuoteColumns.NAME, jsonObject.get("Name"));
- //           builder.withValue(QuoteColumns.YIELD, jsonObject.get("DividendYield"));
+ //         builder.withValue(QuoteColumns.YIELD, jsonObject.get("DividendYield"));
             builder.withValue(QuoteColumns.PEGRATIO, jsonObject.get("PEGRatio"));
             builder.withValue(QuoteColumns.OPEN, jsonObject.get("Open"));
         } catch (JSONException e){

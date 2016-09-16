@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Stock Hawk</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_change_units">Change Units</string>
+    <string name="symbol_search">Symbol Search</string>
+    <string name="content_test">Search for a Stock Symbol</string>
+    <string name="input_hint">FB</string>
+    <string name="input_prefill"></string>
+    <string name="network_toast">Uh-oh! This app requires an internet connection</string>
+
+    <string name="empty_stock_list">No Stock Information Available</string>
+    <string name="empty_stock_list_no_network">No Stock information available. The network is not available to fetch stock            data.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">OPEN</string>
+    <string name="mkt_cap">MKT CAP</string>
+    <string name="high">HIGH</string>
+    <string name="_52w_high">52W HIGH</string>
+    <string name="low">LOW</string>
+    <string name="_52w_low">52W LOW</string>
+    <string name="vol">VOL</string>
+    <string name="avg_vol">AVG VOL</string>
+    <string name="p_e">P/E</string>
+    <string name="yield">YIELD</string>
+
+    <string name="title_widget_detail">StockHawk Details</string>
+
+</resources>

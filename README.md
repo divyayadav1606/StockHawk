@@ -14,6 +14,13 @@ You will productionize an app, taking it from a functional state to a production
 7. Stock Price History and Interactive Graph
 
 #Screenshots
+<img src="https://github.com/divyayadav1606/StockHawk/blob/master/screenshots/Screenshot_2016-09-16-16-50-21.png"  width="50%" align="center"/>
+
+<img src="https://github.com/divyayadav1606/StockHawk/blob/master/screenshots/Screenshot_2016-09-16-16-50-31.png"  width="50%" align="center"/>
+
+<img src="https://github.com/divyayadav1606/StockHawk/blob/master/screenshots/Screenshot_2016-09-16-16-50-42.png"  width="50%" align="center"/>
+
+<img src="https://github.com/divyayadav1606/StockHawk/blob/master/screenshots/screen.png"  width="100%" align="center"/>
 
 #Libraries Used
 [ButterKnife](http://jakewharton.github.io/butterknife/)

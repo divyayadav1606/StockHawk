@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Stock Hawk</string>
-
-    <string name="action_example">Example action</string>
-
-    <string name="action_settings">Settings</string>
     <string name="action_change_units">Change Units</string>
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
@@ -14,8 +10,6 @@
     <string name="empty_stock_list">No Stock Information Available</string>
     <string name="empty_stock_list_no_network">No Stock information available. The network is not available to fetch stock            data.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open">OPEN</string>
     <string name="mkt_cap">MKT CAP</string>
     <string name="high">HIGH</string>
@@ -28,5 +22,14 @@
     <string name="yield">YIELD</string>
 
     <string name="title_widget_detail">StockHawk Details</string>
+    <string name="new_stock_add">Add new stock symbol</string>
+    <string name="market_cap">Market Cap</string>
+    <string name="day_s_high">Day\'s High</string>
+    <string name="_52_week_high">52 week high</string>
+    <string name="day_s_low">Day\'s low</string>
+    <string name="_52_week_low">52 week low</string>
+    <string name="volume">Volume</string>
+    <string name="average_volume">Average volume</string>
+    <string name="p_n_e_ratio">P n E Ratio</string>
 
 </resources>

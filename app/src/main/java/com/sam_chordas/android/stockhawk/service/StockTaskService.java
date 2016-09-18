@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.service;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
@@ -143,8 +144,15 @@ public class StockTaskService extends GcmTaskService{
                         mContext.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
                         null, null);
                     }
-                    mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
-                    Utils.quoteJsonToContentVals(getResponse));
+
+                    ArrayList<ContentProviderOperation> cpo = Utils.quoteJsonToContentVals(getResponse);
+                    if(cpo!=null && cpo.size() > 0)
+                        mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,cpo);
+                    else
+                        result = GcmNetworkManager.RESULT_FAILURE;
+
+                    //mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
+                    //Utils.quoteJsonToContentVals(getResponse));
 
                     //Load Stocks History
                     String[] strArray = new String[ list.size() ];

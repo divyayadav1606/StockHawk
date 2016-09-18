@@ -32,14 +32,17 @@ public class Utils {
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 if (count == 1){
                     jsonObject = jsonObject.getJSONObject("results").getJSONObject("quote");
-                    batchOperations.add(buildBatchOperation(jsonObject));
+                    ContentProviderOperation obj =  buildBatchOperation(jsonObject);
+                    if(obj!=null)
+                        batchOperations.add(obj);
                 } else{
                     resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
                     if (resultsArray != null && resultsArray.length() != 0){
                         for (int i = 0; i < resultsArray.length(); i++){
                             jsonObject = resultsArray.getJSONObject(i);
-                            batchOperations.add(buildBatchOperation(jsonObject));
+                            if(jsonObject!=null)
+                                batchOperations.add(buildBatchOperation(jsonObject));
                         }
                     }
                  }
@@ -73,35 +76,45 @@ public class Utils {
     }
 
     public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject){
+        String change = null;
+
         ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
         QuoteProvider.Quotes.CONTENT_URI);
         try {
-            String change = jsonObject.getString("Change");
-            builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString("symbol"));
-            builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
-            builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(jsonObject.getString("ChangeinPercent"), true));
-            builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
-            builder.withValue(QuoteColumns.ISCURRENT, 1);
-            if (change.charAt(0) == '-'){
-                builder.withValue(QuoteColumns.ISUP, 0);
-            }else{
-                builder.withValue(QuoteColumns.ISUP, 1);
-            }
-            builder.withValue(QuoteColumns.DAYSHIGH, jsonObject.get("DaysHigh"));
-            builder.withValue(QuoteColumns.DAYSLOW, jsonObject.get("DaysLow"));
-            builder.withValue(QuoteColumns.YEARHIGH, jsonObject.get("YearHigh"));
-            builder.withValue(QuoteColumns.YEARLOW, jsonObject.get("YearLow"));
-            builder.withValue(QuoteColumns.YEARRANGE, jsonObject.get("YearRange"));
-            builder.withValue(QuoteColumns.VOLUME, jsonObject.get("Volume"));
-            builder.withValue(QuoteColumns.AVGVOLUME, jsonObject.get("AverageDailyVolume"));
-            builder.withValue(QuoteColumns.MKTCAP, jsonObject.get("MarketCapitalization"));
-            builder.withValue(QuoteColumns.NAME, jsonObject.get("Name"));
- //         builder.withValue(QuoteColumns.YIELD, jsonObject.get("DividendYield"));
-            builder.withValue(QuoteColumns.PEGRATIO, jsonObject.get("PEGRatio"));
-            builder.withValue(QuoteColumns.OPEN, jsonObject.get("Open"));
-        } catch (JSONException e){
+            change = jsonObject.getString("Change");
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return builder.build();
+
+        if (change != null && change != "null") {
+            try {
+                builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString("symbol"));
+                builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
+                builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(jsonObject.getString("ChangeinPercent"), true));
+                builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
+                builder.withValue(QuoteColumns.ISCURRENT, 1);
+                if (change.charAt(0) == '-') {
+                    builder.withValue(QuoteColumns.ISUP, 0);
+                } else {
+                    builder.withValue(QuoteColumns.ISUP, 1);
+                }
+                builder.withValue(QuoteColumns.DAYSHIGH, jsonObject.getString("DaysHigh"));
+                builder.withValue(QuoteColumns.DAYSLOW, jsonObject.getString("DaysLow"));
+                builder.withValue(QuoteColumns.YEARHIGH, jsonObject.getString("YearHigh"));
+                builder.withValue(QuoteColumns.YEARLOW, jsonObject.getString("YearLow"));
+                builder.withValue(QuoteColumns.YEARRANGE, jsonObject.getString("YearRange"));
+                builder.withValue(QuoteColumns.VOLUME, jsonObject.getString("Volume"));
+                builder.withValue(QuoteColumns.AVGVOLUME, jsonObject.getString("AverageDailyVolume"));
+                builder.withValue(QuoteColumns.MKTCAP, jsonObject.getString("MarketCapitalization"));
+                builder.withValue(QuoteColumns.NAME, jsonObject.getString("Name"));
+                //         builder.withValue(QuoteColumns.YIELD, jsonObject.getString("DividendYield"));
+                builder.withValue(QuoteColumns.PEGRATIO, jsonObject.getString("PEGRatio"));
+                builder.withValue(QuoteColumns.OPEN, jsonObject.getString("Open"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return builder.build();
+        }
+        return null;
     }
 }

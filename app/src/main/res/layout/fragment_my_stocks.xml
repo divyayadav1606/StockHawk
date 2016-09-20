@@ -7,7 +7,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingBottom="48dp"
+        android:clipToPadding="false"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -17,6 +19,8 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_add_white_24dp"
         android:contentDescription="@string/new_stock_add"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         fab:fab_colorNormal="@color/material_blue_500"
         fab:fab_colorPressed="@color/material_blue_600"
         fab:fab_colorRipple="@color/ripple"

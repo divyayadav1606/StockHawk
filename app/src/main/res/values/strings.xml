@@ -31,5 +31,7 @@
     <string name="volume">Volume</string>
     <string name="average_volume">Average volume</string>
     <string name="p_n_e_ratio">P n E Ratio</string>
+    <string name="stock_duplicate_msg">This stock is already saved!</string>
+    <string name="symbol_not_found">Error! symbol Not found</string>
 
 </resources>

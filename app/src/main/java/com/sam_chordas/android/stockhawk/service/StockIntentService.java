@@ -39,7 +39,7 @@ public class StockIntentService extends IntentService {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Error!symbol Not found", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.symbol_not_found, Toast.LENGTH_LONG).show();
                     }
                 });
             }

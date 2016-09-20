@@ -110,7 +110,7 @@ public class MyStockFragment extends Fragment implements  LoaderManager.LoaderCa
                                             new String[] { input.toString() }, null);
                                     if (c.getCount() != 0) {
                                         Toast toast =
-                                                Toast.makeText(getContext(), "This stock is already saved!",
+                                                Toast.makeText(getContext(), R.string.stock_duplicate_msg,
                                                         Toast.LENGTH_LONG);
                                         toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
                                         toast.show();

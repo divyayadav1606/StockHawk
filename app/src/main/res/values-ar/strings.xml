@@ -22,5 +22,7 @@
 
     <string name="title_widget_detail">تفاصيل StockHawk</string>
     <string name="new_stock_add">Add new stock symbol</string>
+    <string name="stock_duplicate_msg">This stock is already saved!</string>
+    <string name="symbol_not_found">Error! symbol Not found</string>
 
 </resources>
